@@ -1,0 +1,18 @@
+###
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+    "email": "teste@email.com",
+    "password": "teste"
+}
+
+###
+POST http://localhost:3000/tasks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
+
+{
+    "username": "teste",
+    "password": "teste"
+}
