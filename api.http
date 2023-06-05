@@ -7,12 +7,34 @@ Content-Type: application/json
     "password": "teste"
 }
 
+
 ###
 POST http://localhost:3000/tasks
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
 
 {
-    "username": "teste",
-    "password": "teste"
+    "title": "regar o jardim seg á sex 2",
+    "status": "em andamento",
+    "description": "encher o regador até 250 ml e regar o jardim do pátio á ao campo de futebol",
+    "priority": 5
+}
+
+###
+GET http://localhost:3000/tasks
+
+
+###
+GET http://localhost:3000/tasks/5
+
+
+###
+POST http://localhost:3000/tasks/5/tags
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
+
+{
+    "cor": "Vermelho",
+    "name": "Cartao lembrete"
+  
 }
