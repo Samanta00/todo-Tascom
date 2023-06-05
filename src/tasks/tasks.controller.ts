@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   UseGuards,
-  Query,
   HttpStatus,
   HttpCode,
   ParseIntPipe,
@@ -17,9 +16,6 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { JWT_GUARD } from 'src/auth/jwt.strategy';
 import { AuthGuard } from '@nestjs/passport';
-import { Observable, of } from 'rxjs';
-import { Task } from './entities/task.entity';
-import { Tags } from './entities/tags.entity';
 import { TagsService } from './tags.service';
 import { CreatTagDto } from './dto/create-tags.dto';
 import { UpdateTagDto } from './dto/update-tags.dto';

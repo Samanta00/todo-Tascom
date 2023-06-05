@@ -1,4 +1,3 @@
-import { IsString } from 'class-validator';
 import { CreatTagDto } from './create-tags.dto';
 import { PartialType } from '@nestjs/mapped-types';
 
