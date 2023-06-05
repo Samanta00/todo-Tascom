@@ -7,40 +7,57 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
+  HttpStatus,
+  HttpCode,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { JWT_GUARD } from 'src/auth/jwt.strategy';
 import { AuthGuard } from '@nestjs/passport';
+import { Observable, of } from 'rxjs';
+import { Task } from './entities/task.entity';
+import { Tags } from './entities/tags.entity';
+import { TagsService } from './tags.service';
+import { CreatTagDto } from './dto/create-tags.dto';
+
 
 @Controller('tasks')
 export class TasksController {
-  constructor(private readonly tasksService: TasksService) {}
+  constructor(private readonly tasksService: TasksService, private readonly tagService: TagsService) {}
 
   @UseGuards(AuthGuard(JWT_GUARD))
   @Post()
-  create(@Body() createTaskDto: CreateTaskDto) {
-    return this.tasksService.create(createTaskDto);
+  createTask(@Body() createTaskDto: CreateTaskDto) {
+    return this.tasksService.createTask(createTaskDto);
   }
 
   @Get()
-  findAll() {
+  @HttpCode(HttpStatus.OK)
+  async findAll() {
     return this.tasksService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tasksService.findOne(+id);
+  findOneTask(@Param('id') id: string) {
+    return this.tasksService.findOneTask(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-    return this.tasksService.update(+id, updateTaskDto);
+  updateTask(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+    return this.tasksService.updateTask(+id, updateTaskDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tasksService.remove(+id);
+  removeTask(@Param('id') id: string) {
+    return this.tasksService.removeTask(+id);
+  }
+  @UseGuards(AuthGuard(JWT_GUARD))
+  @Post("/:taskId/tags")
+  createTag(@Body() createTagDto: CreatTagDto, @Param("taskId", new ParseIntPipe()) taskId:number) {
+    createTagDto.taskId=taskId;
+    return this.tagService.create(createTagDto);
   }
 }
