@@ -1,7 +1,7 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Tags } from './tags.entity';
 
-@Table({tableName:"tasks"})
+@Table({ tableName: 'tasks' })
 export class Task extends Model<Task> {
   @Column({
     type: DataType.INTEGER,

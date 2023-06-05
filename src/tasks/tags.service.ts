@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException, Param } from '@nestjs/common';
 import { Task } from './entities/task.entity';
-import { CreatTagDto} from './dto/create-tags.dto';
+import { CreatTagDto } from './dto/create-tags.dto';
 import { UpdateTagDto } from './dto/update-tags.dto';
 import { of } from 'rxjs';
 import { Tags } from './entities/tags.entity';
@@ -16,12 +16,12 @@ export class TagsService {
 
   //criando uma nova tag
   async create(createTagDto: CreatTagDto) {
-     const newTask = await this.tagModel.create(createTagDto as any);
-     return newTask
+    const newTask = await this.tagModel.create(createTagDto as any);
+    return newTask;
   }
 
   //encontrando todas as tags
-  async findAllTags(): Promise<any> {
+  async find(): Promise<any> {
     return of(this.tagModel);
   }
 
@@ -31,19 +31,27 @@ export class TagsService {
   }
 
   //atualizando uma tag em específico
-  async update(id: number, updateTagDto : UpdateTagDto) {
-    const taskCount= await this.taskModel.count({where:{id: updateTagDto.taskId}})
-   
-    if(taskCount===0)throw new NotFoundException("task don't found")
-    const tagCount= await this.tagModel.count({where:{id}})
-    if(tagCount===0)throw new NotFoundException("tag don't found")
+  async update(id: number, updateTagDto: UpdateTagDto) {
+    const taskCount = await this.taskModel.count({
+      where: { id: updateTagDto.taskId },
+    });
+
+    if (taskCount === 0) throw new NotFoundException("task don't found");
+    await this.checkIfExistsTag(id);
     await this.tagModel.update(updateTagDto, { where: { id } });
-    return {id,...updateTagDto}
+    return { id, ...updateTagDto };
   }
 
   //removendo uma tag em específico
   async remove(id: number) {
-    // await this.tagModel.delete(id);
-    return `This action removes a #${id} task`;
+    const register = await this.tagModel.findOne({ where: { id } });
+    if (!register) {
+      throw new Error(`Don't found this register`);
+    }
+    console.log(register);
+  }
+  private async checkIfExistsTag(id: number) {
+    const count = await this.tagModel.count({ where: { id } });
+    if (count === 0) throw new NotFoundException("task don't found");
   }
 }
