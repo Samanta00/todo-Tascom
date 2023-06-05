@@ -22,7 +22,12 @@ export class TasksService {
 
   //encontrando todas as tarefas
   async findAll(): Promise<any> {
-    return await this.taskModel.findAll();
+    return await this.taskModel.findAll({
+      include: [{
+        model: Tags
+      }],
+      order: [['priority', 'DESC']]
+    });
   }
 
   //encontrando uma tarefa em específico
