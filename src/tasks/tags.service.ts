@@ -1,7 +1,7 @@
-import { Inject, Injectable, Param } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Param } from '@nestjs/common';
 import { Task } from './entities/task.entity';
 import { CreatTagDto} from './dto/create-tags.dto';
-import { UpdateTag } from './dto/update-tags.dto';
+import { UpdateTagDto } from './dto/update-tags.dto';
 import { of } from 'rxjs';
 import { Tags } from './entities/tags.entity';
 
@@ -10,6 +10,8 @@ export class TagsService {
   constructor(
     @Inject('TAG_REPOSITORY')
     private readonly tagModel: typeof Tags,
+    @Inject('TASK_REPOSITORY')
+    private readonly taskModel: typeof Task,
   ) {}
 
   //criando uma nova tag
@@ -24,18 +26,23 @@ export class TagsService {
   }
 
   //encontrando uma tag em específico
-  findOneTags(id: number) {
+  findOne(id: number) {
     return `This action returns a #${id} task`;
   }
 
   //atualizando uma tag em específico
-  async updateTask(id: number, UpdateTag: CreatTagDto) {
-    console.log(`This action updates a #${id} task`);
-    return await this.tagModel.update({ id }, { where: { id } });
+  async update(id: number, updateTagDto : UpdateTagDto) {
+    const taskCount= await this.taskModel.count({where:{id: updateTagDto.taskId}})
+   
+    if(taskCount===0)throw new NotFoundException("task don't found")
+    const tagCount= await this.tagModel.count({where:{id}})
+    if(tagCount===0)throw new NotFoundException("tag don't found")
+    await this.tagModel.update(updateTagDto, { where: { id } });
+    return {id,...updateTagDto}
   }
 
   //removendo uma tag em específico
-  async removeTask(id: number) {
+  async remove(id: number) {
     // await this.tagModel.delete(id);
     return `This action removes a #${id} task`;
   }

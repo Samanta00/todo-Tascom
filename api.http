@@ -50,3 +50,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
     "name": "Cartao lembrete"
   
 }
+
+
+###
+PATCH http://localhost:3000/tasks/5/tags/9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
+
+{
+    "cor": "Laranja",
+    "name": "Cartao lembrete"
+  
+}

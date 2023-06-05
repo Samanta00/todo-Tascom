@@ -22,6 +22,7 @@ import { Task } from './entities/task.entity';
 import { Tags } from './entities/tags.entity';
 import { TagsService } from './tags.service';
 import { CreatTagDto } from './dto/create-tags.dto';
+import { UpdateTagDto } from './dto/update-tags.dto';
 
 
 @Controller('tasks')
@@ -59,5 +60,10 @@ export class TasksController {
   createTag(@Body() createTagDto: CreatTagDto, @Param("taskId", new ParseIntPipe()) taskId:number) {
     createTagDto.taskId=taskId;
     return this.tagService.create(createTagDto);
+  }
+  @Patch("/:taskId/tags/:id")
+  updateTag(@Body() updateTagDto: UpdateTagDto, @Param("taskId", new ParseIntPipe()) taskId:number, @Param("id", new ParseIntPipe()) id:number) { 
+    updateTagDto.taskId=taskId;
+    return this.tagService.update(id, updateTagDto);
   }
 }
