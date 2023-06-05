@@ -1,9 +1,9 @@
-import { Inject, Injectable, Param } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Param } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 //import { Task } from './entities/task.entity';
 import { Tags } from './entities/tags.entity';
-import { of } from 'rxjs';
+import { NotFoundError, of } from 'rxjs';
 import { Task } from './entities/task.entity';
 
 @Injectable()
@@ -31,9 +31,13 @@ export class TasksService {
   }
 
   //atualizando uma tarefa em específico
-  async updateTask(id: number, updateTaskDto: UpdateTaskDto) {
-    console.log(`This action updates a #${id} task`);
-    return await this.taskModel.update({ id }, { where: { id } });
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
+    const taskCount= await this.taskModel.count({where:{id}})
+
+    if(taskCount===0)throw new NotFoundException("task don't found")
+    
+    await this.taskModel.update(updateTaskDto, {where:{id}});
+    return {id,...updateTaskDto}
   }
 
   //removendo uma tareta em específico
