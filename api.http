@@ -56,9 +56,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
 
 {
     "cor": "Vermelho",
-    "name": "Cartao lembrete"
+    "name": "Comemoração"
   
 }
+
+
+###
+GET http://localhost:3000/tasks/tags
+
+###
+GET http://localhost:3000/tasks/tags/7
 
 
 ###

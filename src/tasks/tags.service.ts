@@ -21,13 +21,15 @@ export class TagsService {
   }
 
   //encontrando todas as tags
-  async find(): Promise<any> {
-    return of(this.tagModel);
+  async findAlltag(): Promise<any> {
+    return this.tagModel.findAll();
   }
 
   //encontrando uma tag em específico
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async findOneTag(id: number) {
+    const tags= await this.tagModel.findOne({where:{id}})
+    if (!tags) throw new NotFoundException("task don't found");
+    return tags;
   }
 
   //atualizando uma tag em específico
@@ -44,11 +46,8 @@ export class TagsService {
 
   //removendo uma tag em específico
   async remove(id: number) {
-    const register = await this.tagModel.findOne({ where: { id } });
-    if (!register) {
-      throw new Error(`Don't found this register`);
-    }
-    console.log(register);
+   // const tags = await this.t.findOne(id);
+   // console.log(tags)
   }
   private async checkIfExistsTag(id: number) {
     const count = await this.tagModel.count({ where: { id } });
