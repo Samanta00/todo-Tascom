@@ -2,7 +2,6 @@ import { Inject, Injectable, NotFoundException} from '@nestjs/common';
 import { Task } from './entities/task.entity';
 import { CreatTagDto } from './dto/create-tags.dto';
 import { UpdateTagDto } from './dto/update-tags.dto';
-import { of } from 'rxjs';
 import { Tags } from './entities/tags.entity';
 
 @Injectable()
