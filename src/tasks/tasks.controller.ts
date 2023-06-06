@@ -27,6 +27,7 @@ export class TasksController {
     private readonly tagService: TagsService,
   ) {}
 
+  
   @UseGuards(AuthGuard(JWT_GUARD))
   @Post()
   createTask(@Body() createTaskDto: CreateTaskDto) {
@@ -60,6 +61,11 @@ export class TasksController {
     return this.tasksService.removeTask(id);
   }
 
+
+
+
+
+
   @UseGuards(AuthGuard(JWT_GUARD))
   @Post('/:taskId/tags')
   createTag(
@@ -69,6 +75,19 @@ export class TasksController {
     createTagDto.taskId = taskId;
     return this.tagService.create(createTagDto);
   }
+
+  @Get("/tags")
+  @HttpCode(HttpStatus.OK)
+  async findAlltag() {
+    return this.tagService.findAlltag();
+  }
+
+  @Get('/:id')
+  @HttpCode(HttpStatus.OK)
+  findOneTag(@Param('id', new ParseIntPipe()) id: number) {
+    return this.tasksService.findOne(id);
+  }
+
   @Patch('/:taskId/tags/:id')
   updateTag(
     @Body() updateTagDto: UpdateTagDto,
@@ -80,6 +99,7 @@ export class TasksController {
   }
   @Delete('/:taskId/tags/:id')
   remove(@Param('id', new ParseIntPipe()) id: number) {
-    return this.tasksService.removeTask(id);
+    return this.tagService.remove(id);
   }
+
 }

@@ -3,7 +3,6 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 //import { Task } from './entities/task.entity';
 import { Tags } from './entities/tags.entity';
-import { of } from 'rxjs';
 import { Task } from './entities/task.entity';
 
 @Injectable()
@@ -25,7 +24,10 @@ export class TasksService {
     return await this.taskModel.findAll({
       include: [
         {
-          model: Tags,
+          model:Tags,
+          where: {
+            cor:"Roxo"
+          }
         },
       ],
       order: [['priority', 'DESC']],
