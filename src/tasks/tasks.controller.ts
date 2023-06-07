@@ -14,11 +14,11 @@ import {
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { JWT_GUARD } from 'src/auth/jwt.strategy';
 import { AuthGuard } from '@nestjs/passport';
 import { TagsService } from './tags.service';
 import { CreatTagDto } from './dto/create-tags.dto';
 import { UpdateTagDto } from './dto/update-tags.dto';
+import { JWT_GUARD } from 'src/auth/jwt.strategy';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TasksTodoSwagger } from './dto/swegger/sweggerTasks-todo.swegger';
 import { TagsTodoSwagger } from './dto/swegger/sweggerTags-todo.swegger';
@@ -142,7 +142,8 @@ export class TasksController {
     @Param('id', new ParseIntPipe()) id: number,
   ) {
     updateTagDto.taskId = taskId;
-    return this.tagService.update(id, updateTagDto);
+    return this.tagService.updateTag(id, updateTagDto);
+
   }
 
   @Delete('/:taskId/tags/:id')

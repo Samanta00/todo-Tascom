@@ -14,10 +14,10 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
 
 {
-    "title": "ir para o mercado",
+    "title": "ir para a feira",
     "status": "feito",
-    "description": "comprar uma bolsa",
-    "priority": 10
+    "description": "comprar verduras",
+    "priority": 4
 }
 
 ###
@@ -25,7 +25,7 @@ GET http://localhost:3000/tasks
 
 
 ###
-GET http://localhost:3000/tasks/10
+GET http://localhost:3000/tasks/5
 
 ###
 PATCH http://localhost:3000/tasks/5
@@ -33,14 +33,14 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
 
 {
-    "title": "teste123",
+    "title": "armazem",
     "status": "em andamento",
     "description": "encher o regador até 250 ml e regar o jardim do pátio á ao campo de futebol",
     "priority": 5
 }
 
 ###
-DELETE http://localhost:3000/tasks/10
+DELETE http://localhost:3000/tasks/11
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
 

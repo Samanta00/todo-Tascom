@@ -25,9 +25,9 @@ export class TasksService {
       include: [
         {
           model:Tags,
-          where: {
-            cor:"Roxo"
-          }
+         // where: {
+        //    cor:"Roxo"
+        //  }
         },
       ],
       order: [['priority', 'DESC']],
@@ -45,7 +45,7 @@ export class TasksService {
   async update(id: number, updateTaskDto: UpdateTaskDto) {
     const taskCount = await this.taskModel.count({ where: { id } });
 
-    if (taskCount === 0) throw new NotFoundException("task don't found");
+    if (taskCount === 0) throw new NotFoundException("Task not found");
 
     await this.taskModel.update(updateTaskDto, { where: { id } });
     return { id, ...updateTaskDto };

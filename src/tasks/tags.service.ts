@@ -32,7 +32,7 @@ export class TagsService {
   }
 
   //atualizando uma tag em específico
-  async update(id: number, updateTagDto: UpdateTagDto) {
+  async updateTag(id: number, updateTagDto: UpdateTagDto) {
     const taskCount = await this.taskModel.count({
       where: { id: updateTagDto.taskId },
     });
