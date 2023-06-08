@@ -1,5 +1,5 @@
-import { Inject, Injectable, NotFoundException} from '@nestjs/common';
-import { Task } from './entities/task.entity';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Task } from 'src/tasks/entities/task.entity';
 import { CreatTagDto } from './dto/create-tags.dto';
 import { UpdateTagDto } from './dto/update-tags.dto';
 import { Tags } from './entities/tags.entity';
@@ -11,7 +11,7 @@ export class TagsService {
     private readonly tagModel: typeof Tags,
     @Inject('TASK_REPOSITORY')
     private readonly taskModel: typeof Task,
-  ) {}
+  ) { }
 
   //criando uma nova tag
   async create(createTagDto: CreatTagDto) {
@@ -26,8 +26,8 @@ export class TagsService {
 
   //encontrando uma tag em específico
   async findOneTag(id: number) {
-    const tags= await this.tagModel.findOne({where:{id}})
-    if (!tags) throw new NotFoundException("task don't found");
+    const tags = await this.tagModel.findOne({ where: { id } })
+    if (!tags) throw new NotFoundException("tag don't found");
     return tags;
   }
 
@@ -45,9 +45,11 @@ export class TagsService {
 
   //removendo uma tag em específico
   async remove(id: number) {
-   // const tags = await this.t.findOne(id);
-   // console.log(tags)
+    const task = await this.findOneTag(id);
+    await task.destroy();
+
   }
+
   private async checkIfExistsTag(id: number) {
     const count = await this.tagModel.count({ where: { id } });
     if (count === 0) throw new NotFoundException("task don't found");

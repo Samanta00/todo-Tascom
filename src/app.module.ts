@@ -4,8 +4,9 @@ import { TasksModule } from './tasks/tasks.module';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Tags } from './tasks/entities/tags.entity';
+import { Tags } from './tags/entities/tags.entity';
 import { Task } from './tasks/entities/task.entity';
+import { TagsModule } from './tags/tag.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { Task } from './tasks/entities/task.entity';
     }),
     AuthModule,
     TasksModule,
+    TagsModule,
     SequelizeModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

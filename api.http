@@ -20,8 +20,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
     "priority": 4
 }
 
+
+
 ###
-GET http://localhost:3000/tasks
+GET http://localhost:3000/tasks?colors=Vermelho,Rosa
 
 
 ###
@@ -55,21 +57,21 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
 
 {
-    "cor": "Vermelho",
+    "cor": "Azul",
     "name": "Comemoração"
   
 }
 
 
 ###
-GET http://localhost:3000/tasks/tags
+GET http://localhost:3000/tags
 
 ###
-GET http://localhost:3000/tasks/tags/7
+GET http://localhost:3000/tasks/5
 
 
 ###
-PATCH http://localhost:3000/tasks/5/tags/9
+PATCH http://localhost:3000/tasks/9
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
 
@@ -80,6 +82,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
 }
 
 ###
-DELETE http://localhost:3000/tasks/5/tags/9
+DELETE http://localhost:3000/tasks/4
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE

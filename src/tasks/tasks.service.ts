@@ -2,8 +2,9 @@ import { Inject, Injectable, NotFoundException, Param } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 //import { Task } from './entities/task.entity';
-import { Tags } from './entities/tags.entity';
+import { Tags } from '../tags/entities/tags.entity';
 import { Task } from './entities/task.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class TasksService {
@@ -20,14 +21,17 @@ export class TasksService {
   }
 
   //encontrando todas as tarefas
-  async findAll(): Promise<any> {
+  async findAll(colors?:string[]): Promise<any> {
+    console.log(colors)
     return await this.taskModel.findAll({
       include: [
         {
           model:Tags,
-         // where: {
-        //    cor:"Roxo"
-        //  }
+          where: {
+            cor:{
+              [Op.or]:colors || []
+            }
+          }
         },
       ],
       order: [['priority', 'DESC']],

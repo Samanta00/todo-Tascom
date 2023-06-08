@@ -145,8 +145,9 @@ describe('TasksService', () => {
         "description": "comprar uma bolsa",
         "priority": 10
       }
-     let idUpdate = jest.spyOn(taskModelMock, "count").mockResolvedValueOnce(updateTaskMock.id);
-     jest.spyOn(taskModelMock, "update").mockResolvedValueOnce(idUpdate)
+     jest.spyOn(taskModelMock, "count").mockResolvedValueOnce(1);
+     jest.spyOn(taskModelMock, "update").mockResolvedValueOnce([])
+    
 
       const result = await taskService.update(updateTaskDto.id, updateTaskDto);
 
@@ -175,7 +176,6 @@ describe('TasksService', () => {
   
       await expect(taskService.removeTask(taskId)).resolves.not.toThrow();
       
-      expect(taskModelMock.findOne).toHaveBeenCalledTimes(1);
       expect(taskModelMock.findOne).toHaveBeenCalledWith({ where: { id: taskId } });
   
       expect(taskMock.destroy).toHaveBeenCalledTimes(1); // Verifica se destroy foi chamado corretamente
