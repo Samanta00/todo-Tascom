@@ -7,7 +7,6 @@ import {
 } from 'sequelize-typescript';
 import { Task } from '../../tasks/entities/task.entity';
 
-
 @Table({ tableName: 'tags' })
 export class Tags extends Model {
   @Column({

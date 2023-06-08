@@ -3,13 +3,11 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerSetup } from './swagger/swaggerSetup';
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  SwaggerSetup(app)
+  SwaggerSetup(app);
 
-  
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

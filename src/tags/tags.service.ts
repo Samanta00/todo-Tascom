@@ -11,7 +11,7 @@ export class TagsService {
     private readonly tagModel: typeof Tags,
     @Inject('TASK_REPOSITORY')
     private readonly taskModel: typeof Task,
-  ) { }
+  ) {}
 
   //criando uma nova tag
   async create(createTagDto: CreatTagDto) {
@@ -20,13 +20,15 @@ export class TagsService {
   }
 
   //encontrando todas as tags
-  async findAlltag(): Promise<any> {
-    return this.tagModel.findAll();
+  async findAlltag(taskId: number): Promise<any> {
+    return this.tagModel.findAll({
+      where: { taskId },
+    });
   }
 
   //encontrando uma tag em específico
   async findOneTag(id: number) {
-    const tags = await this.tagModel.findOne({ where: { id } })
+    const tags = await this.tagModel.findOne({ where: { id } });
     if (!tags) throw new NotFoundException("tag don't found");
     return tags;
   }
@@ -47,7 +49,6 @@ export class TagsService {
   async remove(id: number) {
     const task = await this.findOneTag(id);
     await task.destroy();
-
   }
 
   private async checkIfExistsTag(id: number) {

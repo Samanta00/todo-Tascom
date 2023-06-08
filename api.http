@@ -64,14 +64,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
 
 
 ###
-GET http://localhost:3000/tags
+GET http://localhost:3000/5/tags
 
 ###
-GET http://localhost:3000/tasks/5
+GET http://localhost:3000/5/tags/7
 
 
 ###
-PATCH http://localhost:3000/tasks/9
+PATCH http://localhost:3000/5/tags/7
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE
 
@@ -82,6 +82,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
 }
 
 ###
-DELETE http://localhost:3000/tasks/4
+DELETE http://localhost:3000/5/tags/7
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1ODEyNzQyLCJleHAiOjE2ODY0MTc1NDJ9.-6i-h_g2IRRrgZrvFIFrOewBFc6zMuxsMxHcJKCrXsE

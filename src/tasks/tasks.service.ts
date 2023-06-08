@@ -21,17 +21,17 @@ export class TasksService {
   }
 
   //encontrando todas as tarefas
-  async findAll(colors?:string[]): Promise<any> {
-    console.log(colors)
+  async findAll(colors?: string[]): Promise<any> {
+    console.log(colors);
     return await this.taskModel.findAll({
       include: [
         {
-          model:Tags,
+          model: Tags,
           where: {
-            cor:{
-              [Op.or]:colors || []
-            }
-          }
+            cor: {
+              [Op.or]: colors || [],
+            },
+          },
         },
       ],
       order: [['priority', 'DESC']],
@@ -49,7 +49,7 @@ export class TasksService {
   async update(id: number, updateTaskDto: UpdateTaskDto) {
     const taskCount = await this.taskModel.count({ where: { id } });
 
-    if (taskCount === 0) throw new NotFoundException("Task not found");
+    if (taskCount === 0) throw new NotFoundException('Task not found');
 
     await this.taskModel.update(updateTaskDto, { where: { id } });
     return { id, ...updateTaskDto };

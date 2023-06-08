@@ -1,7 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Tags } from '../../tags/entities/tags.entity';
 
-
 @Table({ tableName: 'tasks' })
 export class Task extends Model<Task> {
   @Column({
@@ -10,7 +9,6 @@ export class Task extends Model<Task> {
     autoIncrement: true,
     primaryKey: true,
   })
-  
   id: number;
 
   @Column
@@ -27,7 +25,4 @@ export class Task extends Model<Task> {
 
   @HasMany(() => Tags)
   tags?: Tags[];
-
-
-
 }
